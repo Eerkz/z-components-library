@@ -1,0 +1,9 @@
+{
+  "name": "z-components-library",
+  "version": "1.0.0",
+  "description": "Bootstrap Web Components",
+  "main": "src/index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
