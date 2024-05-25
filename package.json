@@ -1,9 +1,14 @@
 {
   "name": "z-components-library",
-  "version": "1.0.0",
-  "description": "Bootstrap Web Components",
-  "main": "src/index.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.2.0"
+  }
 }
