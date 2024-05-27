@@ -1,5 +1,5 @@
-import { fetchConstructibleStyles } from "../utils/cssLoader.js";
-import { idGenerator } from "../utils/idGenerator.js";
+import { fetchConstructibleStyles } from "../../utils/cssLoader.js";
+import { idGenerator } from "../../utils/idGenerator.js";
 
 export class ZShadowButton extends HTMLElement {
   constructor() {
@@ -65,12 +65,6 @@ export class ZShadowButton extends HTMLElement {
 
     this.shadow.innerHTML = "";
     this.shadow.appendChild(this.button);
-  }
-
-  handleClick() {
-    if (!this.hasAttribute("disabled")) {
-      this.dispatchEvent(new CustomEvent("z-click"));
-    }
   }
 }
 
