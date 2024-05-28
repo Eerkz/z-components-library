@@ -36,8 +36,8 @@ export class ZButton extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [bootstrap, icons] = await fetchConstructibleStyles();
-    this.shadow.adoptedStyleSheets = [bootstrap, icons];
+    const styles = await fetchConstructibleStyles();
+    this.shadow.adoptedStyleSheets = styles
     this.render();
   }
 
