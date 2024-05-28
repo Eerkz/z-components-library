@@ -1,5 +1,5 @@
 import { idGenerator } from "../../utils/idGenerator.js";
-import "../logos/logo.js"
+import "../logos/z-logo.js"
 
 class ZHeader extends HTMLElement {
   constructor() {
