@@ -1,5 +1,7 @@
 import { idGenerator } from "../../utils/idGenerator.js";
-import "../logos/z-logo.js"
+import "../logos/z-logo.js";
+import "../buttons/z-button.js";
+import "../navigations/z-nav.js";
 
 class ZHeader extends HTMLElement {
   constructor() {
@@ -7,11 +9,12 @@ class ZHeader extends HTMLElement {
     
   }
 
-  // static get observedAttributes() {
-  //   return [
-  //     "logo",
-  //   ];
-  // }
+  static get observedAttributes() {
+    return [
+      "logo",
+      "headerClass"
+    ];
+  }
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue !== newValue) {
@@ -24,18 +27,20 @@ class ZHeader extends HTMLElement {
   }
 
   render() {
-    const logoAttributes = this.getAttribute("logo");
-    let logo = {};
-    let logoHTML = "";
-
-    if (logoAttributes) {
+    let imageURL;
+    let height;
+    let width;
+    let brand;
+    let logo = this.getAttribute("logo");
+    const headerClass = this.getAttribute("headerClass");
+  
+    if (logo) {
       try {
-        logo = JSON.parse(logoAttributes);
-        const imageURL = logo.imageURL;
-        const height = logo.height;
-        const width = logo.width;
-        const brand = logo.brand;
-        logoHTML = `<z-logo class="d-flex align-items-center mb-3 mb-md-0 me-md-auto" imageURL="${imageURL}" height="${height}" width="${width}" brand="${brand}"></z-logo>`
+        logo = JSON.parse(logo);
+        imageURL = logo.imageURL;
+        height = logo.height;
+        width = logo.width;
+        brand = logo.brand;
       } catch (e) {
         console.error("Invalid JSON format for logo");
         return;
@@ -44,15 +49,20 @@ class ZHeader extends HTMLElement {
 
     this.innerHTML = `
       <div class="container">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4">
-          ${logoHTML}
-          <ul class="nav nav-pills">
-              <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-              <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-          </ul>
+        <header class="${headerClass}">
+          ${logo ? `<z-logo class="d-flex align-items-center mb-3 mb-md-0 me-md-auto" imageURL="${imageURL}" height="${height}" width="${width}" brand="${brand}"></z-logo>` : ""}
+          <z-nav 
+            navItems='{
+              "Home": {"active": true},
+              "Features": {"active": false},
+              "Pricing": {"active": false},
+              "FAQs": {"active": false},
+              "About": {"active": false}
+            }'
+            anchorClass="nav-link"
+            unorderedListClass="nav nav-pills" 
+            listClass="nav-item"
+          ></z-nav>
         </header>
       </div>
     `;
