@@ -27,6 +27,7 @@ class ZNav extends HTMLElement {
 
         try {
             navItems = JSON.parse(navItems);
+            console.log(navItems);
         } catch (e) {
             console.error("Invalid JSON format for navs");
             return;
@@ -35,9 +36,11 @@ class ZNav extends HTMLElement {
         navItems = Object.entries(navItems)
         .map(
             ([name, { href, active }]) =>
-                `<z-navItem text="${name}" href="${href}" active=${active} anchorClass="${anchorClass}" listClass="${listClass}"></z-navItem>`
+                `<z-navItem text="${name}" ${href ? `href="${href}"` : ""} active=${active} anchorClass="${anchorClass}" listClass="${listClass}"></z-navItem>`
         )
         .join("");
+
+        console.log(navItems);
 
         this.innerHTML = `
             <ul class="${unorderedListClass}">
