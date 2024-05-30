@@ -1,4 +1,5 @@
 import { idGenerator } from "../../utils/idGenerator.js";
+import parseJSONAttribute from "../../utils/jsonParse.js";
 
 class ZCarousel extends HTMLElement {
   constructor() {
@@ -75,23 +76,11 @@ class ZCarousel extends HTMLElement {
   }
 
   get captions() {
-    return this.parseJSONAttribute("data-captions");
+    return parseJSONAttribute(this, "data-captions");
   }
 
   get images() {
-    return this.parseJSONAttribute("data-images");
-  }
-
-  parseJSONAttribute(attr, defaultValue = []) {
-    const value = this.getAttribute(attr);
-    if (!value) return defaultValue;
-
-    try {
-      return JSON.parse(value);
-    } catch (e) {
-      console.error(`Invalid JSON format for ${attr}`, e);
-      return defaultValue;
-    }
+    return parseJSONAttribute(this, "data-images");
   }
 
   updateStyles() {
